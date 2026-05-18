@@ -19,7 +19,7 @@ export default function BottomNav({ seccionActiva, setSeccionActiva, obtenerEsti
           alt="Detalles" 
           className={`w-6 h-6 object-contain transition-opacity duration-300 ${seccionActiva === 'detalles' ? 'opacity-100' : 'opacity-60'}`} 
         />
-        <span className="text-[10px] tracking-wide mt-1">Detalles</span>
+        <span className="text-[10px] tracking-wide mt-1">Celebración</span>
       </button>
 
       {/* Botón Ubicación */}
