@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import parejaIcono from '../assets/pareja.png';
+import BrindisIcono from '../assets/salud.png'; // Cargado correctamente desde assets
 import ubicacionIcono from '../assets/icons/ic_ubicacion.svg';
 
-// Importación de Componentes usando tus nuevos nombres
+// Importación de Componentes
 import SidebarNav from '../components/SidebarNav';
 import BottomNav from '../components/BottomNav';
 import InicioView from './InicioView';
@@ -12,7 +13,6 @@ import UbicacionView from './UbicacionView';
 export default function MainView() {
   const [seccionActiva, setSeccionActiva] = useState('saludo');
 
-  // Estilo base de los botones adaptado para soportar los filtros de color del SVG
   const obtenerEstiloBtn = (id) => {
     const isActive = seccionActiva === id;
     return `
@@ -25,7 +25,7 @@ export default function MainView() {
   };
 
   return (
-    <div className="min-h-screen bg-[#faf6f0] text-[#4a3f35] flex flex-col md:flex-row font-sans items-center justify-center">
+    <div className="min-h-screen bg-[#faf6f0] text-[#4a3f35] flex flex-col md:flex-row font-sans antialiased overflow-hidden">
       
       {/* Menú Web (Izquierda) */}
       <SidebarNav 
@@ -33,6 +33,7 @@ export default function MainView() {
         setSeccionActiva={setSeccionActiva} 
         obtenerEstiloBtn={obtenerEstiloBtn} 
         parejaIcono={parejaIcono} 
+        BrindisIcono={BrindisIcono}
         ubicacionIcono={ubicacionIcono} 
       />
 
@@ -42,12 +43,13 @@ export default function MainView() {
         setSeccionActiva={setSeccionActiva} 
         obtenerEstiloBtn={obtenerEstiloBtn} 
         parejaIcono={parejaIcono} 
+        BrindisIcono={BrindisIcono} 
         ubicacionIcono={ubicacionIcono} 
       />
 
-      {/* Tarjeta de Contenido con Scroll Independiente */}
-      <main className="w-full flex items-center justify-center p-4 pt-6 pb-24 md:p-0 md:pl-48">
-        <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-[#e6dfd5]/60 p-6 md:p-10 text-center transition-all duration-300">
+      {/* SCROLL GLOBAL DE LA APP */}
+      <main className="w-full h-screen overflow-y-auto pb-24 md:pb-0 md:pl-56 flex justify-center items-start md:items-center p-4 pt-6 scroll-smooth">
+        <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-[#e6dfd5]/60 p-6 md:p-10 text-center my-auto transition-all duration-300">
           {seccionActiva === 'saludo' && <InicioView />}
           {seccionActiva === 'detalles' && <DetallesView />}
           {seccionActiva === 'ubicacion' && <UbicacionView />}
