@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function BottomNav({ seccionActiva, setSeccionActiva, obtenerEstiloBtn, parejaIcono, BrindisIcono, ubicacionIcono }) {
+export default function BottomNav({ seccionActiva, setSeccionActiva, obtenerEstiloBtn, parejaIcono, BrindisIcono, ubicacionIcono, musicaIcono, isPlaying, toggleMusica }) {
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md border-t border-[#e6dfd5]/80 z-50 flex justify-around px-2 pb-safe-bottom shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:hidden">
       
@@ -35,6 +35,14 @@ export default function BottomNav({ seccionActiva, setSeccionActiva, obtenerEsti
         />
         <span className="text-[10px] tracking-wide mt-1">Ubicación</span>
       </button>
+
+      {/* Botón Música (NUEVO) */}
+      <button onClick={toggleMusica} className="relative flex flex-col items-center justify-center w-full py-2 text-[#a38a70]/60 hover:text-[#8c7863] transition-colors">
+        <div className={`absolute top-1 w-12 h-7 rounded-full transition-all duration-300 -z-10 ${isPlaying ? 'bg-[#8c7863]/20 scale-100 animate-pulse' : 'scale-75 opacity-0'}`} />
+        <img src={musicaIcono} alt="Música" className={`w-6 h-6 object-contain transition-opacity duration-300 ${isPlaying ? 'opacity-100' : 'opacity-60'}`} />
+        <span className="text-[10px] tracking-wide mt-1">{isPlaying ? 'Pausar' : 'Música'}</span>
+      </button>
+
     </nav>
   );
 }

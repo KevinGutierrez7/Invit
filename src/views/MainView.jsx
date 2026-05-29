@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import parejaIcono from '../assets/pareja.png';
 import BrindisIcono from '../assets/salud.png';
 import ubicacionIcono from '../assets/icons/ic_ubicacion.svg';
+import musicaIcono from '../assets/icons/ic_music.svg'; // IMPORTA TU ICONO DE MÚSICA AQUÍ
+import cancionBoda from '../assets/cancion.mp3'; // IMPORTA TU CANCIÓN AQUÍ
 
 import SidebarNav from '../components/SidebarNav';
 import TikTokRightNav from '../components/TikTokRightNav';
@@ -11,6 +13,19 @@ import UbicacionView from './UbicacionView';
 
 export default function MainView() {
   const [seccionActiva, setSeccionActiva] = useState('saludo');
+  
+  // ESTADOS Y REFERENCIAS PARA LA MÚSICA
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const toggleMusica = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   // Intersection Observer ajustado para un scroll continuo más natural
   useEffect(() => {
@@ -24,7 +39,6 @@ export default function MainView() {
       },
       {
         root: null,
-        // Estos márgenes hacen que detecte la sección un poco antes de que llegue al centro
         rootMargin: '-20% 0px -40% 0px', 
         threshold: 0.1
       }
@@ -39,7 +53,6 @@ export default function MainView() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      // block: 'start' asegura que se posicione bien arriba de la sección
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
@@ -57,6 +70,9 @@ export default function MainView() {
   return (
     <div className="min-h-screen bg-[#faf6f0] text-[#4a3f35] flex font-sans antialiased overflow-hidden">
       
+      {/* ELEMENTO DE AUDIO OCULTO */}
+      <audio ref={audioRef} src={cancionBoda} loop />
+
       {/* Menú Web (Izquierda) */}
       <SidebarNav 
         seccionActiva={seccionActiva} 
@@ -65,6 +81,9 @@ export default function MainView() {
         parejaIcono={parejaIcono} 
         BrindisIcono={BrindisIcono}
         ubicacionIcono={ubicacionIcono} 
+        musicaIcono={musicaIcono}
+        isPlaying={isPlaying}
+        toggleMusica={toggleMusica}
       />
 
       {/* Menú Móvil Flotante Derecha (Estilo TikTok) */}
@@ -73,19 +92,19 @@ export default function MainView() {
         scrollToSection={scrollToSection} 
         parejaIcono={parejaIcono} 
         BrindisIcono={BrindisIcono} 
-        ubicacionIcono={ubicacionIcono} 
+        ubicacionIcono={ubicacionIcono}
+        musicaIcono={musicaIcono}
+        isPlaying={isPlaying}
+        toggleMusica={toggleMusica}
       />
 
-      {/* SCROLL GLOBAL CONTINUO (Sin saltos) */}
+      {/* SCROLL GLOBAL CONTINUO */}
       <main className="w-full h-screen overflow-y-auto scroll-smooth md:pl-56 pb-6 pt-6 px-4 flex justify-center">
-        
-        {/* UNA SOLA TARJETA BLANCA PARA TODA LA INVITACIÓN */}
         <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-[#e6dfd5]/60 p-6 md:p-10 flex flex-col gap-12 md:gap-16 h-max">          
           <section id="saludo" className="scroll-mt-8">
             <InicioView />
           </section>
 
-          {/* Divisor estético entre secciones */}
           <div className="flex justify-center opacity-60">
              <span className="h-[1px] w-32 bg-gradient-to-r from-transparent via-[#b89c7d] to-transparent"></span>
           </div>
@@ -94,7 +113,6 @@ export default function MainView() {
             <DetallesView />
           </section>
 
-          {/* Divisor estético entre secciones */}
           <div className="flex justify-center opacity-60">
              <span className="h-[1px] w-32 bg-gradient-to-r from-transparent via-[#b89c7d] to-transparent"></span>
           </div>
@@ -102,7 +120,6 @@ export default function MainView() {
           <section id="ubicacion" className="scroll-mt-8">
             <UbicacionView />
           </section>
-
         </div>
       </main>
     </div>
