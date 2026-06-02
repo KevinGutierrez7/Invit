@@ -1,4 +1,6 @@
 import React from 'react';
+import igle from '../assets/igle.jpg';
+import salon from '../assets/salon.jpg';
 
 export default function UbicacionView() {
   return (
@@ -43,8 +45,12 @@ export default function UbicacionView() {
           </div>
           
           {/* Círculo estético del lugar (puedes reemplazar el div por una etiqueta <img> si tienes foto) */}
-          <div className="w-28 h-28 rounded-full mx-auto bg-[#e6dfd5]/40 border border-[#e6dfd5] flex items-center justify-center text-2xl shadow-inner">
-            ⛪
+          <div className="w-28 h-28 mx-auto">
+            <img
+              src={igle}
+              alt="Parroquia de Santa María"
+              className="w-full h-full object-cover rounded-full border border-[#e6dfd5] shadow-md"
+            />
           </div>
 
           <div className="space-y-2">
@@ -78,8 +84,12 @@ export default function UbicacionView() {
           </div>
           
           {/* Círculo estético del lugar */}
-          <div className="w-28 h-28 rounded-full mx-auto bg-[#e6dfd5]/40 border border-[#e6dfd5] flex items-center justify-center text-2xl shadow-inner">
-            🥂
+          <div className="w-28 h-28 mx-auto">
+            <img
+              src={salon}
+              alt="Jardín El Campanario"
+              className="w-full h-full object-cover rounded-full border border-[#e6dfd5] shadow-md"
+            />
           </div>
 
           <div className="space-y-2">
