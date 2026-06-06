@@ -34,7 +34,7 @@ const InicioView = memo(function InicioView() {
       {/* NOMBRES ESTILIZADOS (GRANDES Y ELEGANTES) */}
       <div className="py-4 space-y-2 select-none">
         <h1 className="text-5xl md:text-7xl font-serif tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-[#b89c7d] via-[#8c7863] to-[#b89c7d] drop-shadow-sm font-light custom-wedding-font">
-          Alejandro
+          Marco
         </h1>
         
         <div className="flex items-center justify-center gap-4 my-2">
