@@ -1,10 +1,9 @@
-import React from 'react';
-import igle from '../assets/igle.jpg';
-import salon from '../assets/salon.jpg';
+import React, { memo } from 'react';
+import igle from '../assets/images/igle.webp';
+import salon from '../assets/images/salon.webp';
 
-export default function UbicacionView() {
+const UbicacionView = memo(function UbicacionView() {
   return (
-    /* Ajuste: Eliminadas las clases max-h y overflow-y-auto para liberar el scroll global */
     <div className="space-y-8 text-center py-2">
       
       {/* Etiqueta Principal */}
@@ -32,7 +31,7 @@ export default function UbicacionView() {
         </p>
       </div>
 
-      {/* DETALLES DE LOS EVENTOS (ESTILO RE-ORDENADO COMO LA IMAGEN) */}
+      {/* DETALLES DE LOS EVENTOS */}
       <div className="space-y-6 max-w-sm mx-auto">
         
         {/* Tarjeta: Ceremonia */}
@@ -44,11 +43,11 @@ export default function UbicacionView() {
             <p className="text-sm font-medium text-[#705e4d]">5:00 PM</p>
           </div>
           
-          {/* Círculo estético del lugar (puedes reemplazar el div por una etiqueta <img> si tienes foto) */}
           <div className="w-28 h-28 mx-auto">
             <img
               src={igle}
               alt="Parroquia de Santa María"
+              loading="lazy"
               className="w-full h-full object-cover rounded-full border border-[#e6dfd5] shadow-md"
             />
           </div>
@@ -83,11 +82,11 @@ export default function UbicacionView() {
             <p className="text-sm font-medium text-[#705e4d]">7:30 PM</p>
           </div>
           
-          {/* Círculo estético del lugar */}
           <div className="w-28 h-28 mx-auto">
             <img
               src={salon}
               alt="Jardín El Campanario"
+              loading="lazy"
               className="w-full h-full object-cover rounded-full border border-[#e6dfd5] shadow-md"
             />
           </div>
@@ -117,4 +116,6 @@ export default function UbicacionView() {
       
     </div>
   );
-}
+});
+
+export default UbicacionView;

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
+import foto1 from '../assets/images/f1.webp';
+import foto2 from '../assets/images/f2.webp';
 
-import foto1 from '../assets/f1.jpg';
-import foto2 from '../assets/f2.jpg';
+// LA CONSTANTE SE QUEDA AQUÍ AFUERA (Evita cálculos innecesarios cada segundo)
+const FECHA_BODA = new Date('2026-12-12T17:00:00').getTime();
 
-export default function DetallesView() {
-  // CONFIGURA AQUÍ LA FECHA DE TU BODA
-  const fechaBoda = new Date('2026-12-12T17:00:00').getTime();
-
+const DetallesView = memo(function DetallesView() {
   const [tiempoRestante, setTiempoRestante] = useState({
     dias: 0, horas: 0, minutos: 0, segundos: 0
   });
@@ -14,7 +13,7 @@ export default function DetallesView() {
   useEffect(() => {
     const intervalo = setInterval(() => {
       const ahora = new Date().getTime();
-      const diferencia = fechaBoda - ahora;
+      const diferencia = FECHA_BODA - ahora;
 
       if (diferencia <= 0) {
         clearInterval(intervalo);
@@ -28,10 +27,9 @@ export default function DetallesView() {
     }, 1000);
 
     return () => clearInterval(intervalo);
-  }, [fechaBoda]);
+  }, []); // Quitamos FECHA_BODA de las dependencias porque ya es externa estática
 
   return (
-    /* Liberado el scroll para seguir la consistencia de UbicacionView */
     <div className="space-y-8 text-center py-2 max-w-sm mx-auto px-1">
       
       {/* SECCIÓN: NUESTRA HISTORIA */}
@@ -46,18 +44,19 @@ export default function DetallesView() {
           El Motivo de Celebrar
         </h2>
         
-        {/* Cuadrícula de fotos con las imágenes reales asignadas */}
+        {/* Cuadrícula de fotos */}
         <div className="grid grid-cols-2 gap-4 pt-2">
           
           {/* Contenedor Foto 1 */}
           <div className="bg-[#fcfaf7] aspect-[3/4] rounded-[2rem] border border-[#e6dfd5]/60 overflow-hidden shadow-sm">
             <img 
               src={foto1} 
+              loading="lazy"
               className="w-full h-full object-cover" 
               alt="Nosotros Foto 1"
               onError={(e) => {
                 e.target.style.display = 'none';
-                e.target.parentNode.innerHTML = '<span className="text-xs text-[#a38a70]/60 italic p-4 flex items-center justify-center h-full">[ f1.jpg no encontrada ]</span>';
+                e.target.parentNode.innerHTML = '<span class="text-xs text-[#a38a70]/60 italic p-4 flex items-center justify-center h-full">[ f1.jpg no encontrada ]</span>';
               }}
             />
           </div>
@@ -66,11 +65,12 @@ export default function DetallesView() {
           <div className="bg-[#fcfaf7] aspect-[3/4] rounded-[2rem] border border-[#e6dfd5]/60 overflow-hidden shadow-sm">
             <img 
               src={foto2} 
+              loading="lazy"
               className="w-full h-full object-cover" 
               alt="Nosotros Foto 2"
               onError={(e) => {
                 e.target.style.display = 'none';
-                e.target.parentNode.innerHTML = '<span className="text-xs text-[#a38a70]/60 italic p-4 flex items-center justify-center h-full">[ f2.jpg no encontrada ]</span>';
+                e.target.parentNode.innerHTML = '<span class="text-xs text-[#a38a70]/60 italic p-4 flex items-center justify-center h-full">[ f2.jpg no encontrada ]</span>';
               }}
             />
           </div>
@@ -138,4 +138,6 @@ export default function DetallesView() {
 
     </div>
   );
-}
+});
+
+export default DetallesView;

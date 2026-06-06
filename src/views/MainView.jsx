@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import parejaIcono from '../assets/pareja.png';
-import BrindisIcono from '../assets/salud.png';
+import parejaIcono from '../assets/icons/ic_pareja.svg';
+import BrindisIcono from '../assets/icons/ic_salud.svg';
 import ubicacionIcono from '../assets/icons/ic_ubicacion.svg';
 import musicaIcono from '../assets/icons/ic_music.svg'; 
 import cancionBoda from '../assets/cancion.mp3'; 

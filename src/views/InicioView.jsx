@@ -1,7 +1,7 @@
-import React from 'react';
-import heroImg from '../assets/boda.png';
+import heroImg from '../assets/images/boda.webp';
+import React, { memo } from 'react';
 
-export default function InicioView() {
+const InicioView = memo(function InicioView() {
   return (
     <div className="space-y-10 text-center py-6 px-4 max-w-2xl mx-auto">
       
@@ -70,4 +70,5 @@ export default function InicioView() {
 
     </div>
   );
-}
+});
+export default InicioView;
